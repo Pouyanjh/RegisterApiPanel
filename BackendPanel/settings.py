@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'User',
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt',
 ]
 AUTH_USER_MODEL = 'User.user'
 
@@ -56,6 +57,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'BackendPanel.urls'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    )
+}
 
 TEMPLATES = [
     {

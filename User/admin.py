@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 class UserAdmin(BaseUserAdmin):
-    list_display = ['email', 'fullname', 'username', 'date_joined', 'is_staff']
+    list_display = ['email', 'fullname', 'username', 'date_joined', 'is_staff', 'userid']
     search_fields = ['username', 'email']
     readonly_fields = ['date_joined', 'last_login']
     filter_horizontal = ()
@@ -15,7 +15,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes':('wide'),
-            'fields':('email', 'username', 'fullname', 'password1', 'password2'),
+            'fields':('email', 'username', 'fullname', 'password1', 'password2', 'userid'),
         })
     ),
 
