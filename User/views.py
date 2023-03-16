@@ -1,11 +1,29 @@
+
 from rest_framework.response import Response
 
 from .models import user
 from rest_framework import generics, status
 
 from .serializer import RegisterSerializer
-from .serializer import GetuserSerializer
+
 from rest_framework.views import APIView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username,
+        token['email'] = user.email
+        # ...
+
+        return token
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 class RegisterView(generics.CreateAPIView):
@@ -14,15 +32,12 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
 
-class GetuserApiView(APIView):
-    def get(self, request, userid):
-        try:
-            getuser = user.objects.get(userid=userid)
-        except user.DoesNotExist:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = GetuserSerializer(getuser, context={'request': request})
-        return Response(serializer.data)
+
+
+
+
+
 
 
 
