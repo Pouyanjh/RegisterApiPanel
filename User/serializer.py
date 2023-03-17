@@ -1,7 +1,7 @@
 
 from rest_framework.validators import UniqueValidator
 
-from .models import user
+from .models import user, Product
 from rest_framework import serializers
 from rest_framework import validators
 
@@ -42,6 +42,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         return User
+    
+class ProductSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = (
+            'title', 'description', 'price', 'image', 'id'
+        )
 
 
 

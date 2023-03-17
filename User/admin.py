@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import user
+from .models import user, Product
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+
 
 
 class UserAdmin(BaseUserAdmin):
@@ -18,5 +19,15 @@ class UserAdmin(BaseUserAdmin):
             'fields':('email', 'username', 'fullname', 'password1', 'password2', 'userid'),
         })
     ),
+@admin.register(Product)
+class Productadmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'id']
+
+
+
+
 
 admin.site.register(user, UserAdmin)
+
+
+

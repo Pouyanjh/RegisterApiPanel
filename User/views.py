@@ -1,10 +1,10 @@
 
 from rest_framework.response import Response
 
-from .models import user
+from .models import user, Product
 from rest_framework import generics, status
 
-from .serializer import RegisterSerializer
+from .serializer import RegisterSerializer, ProductSerializer
 
 from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -30,6 +30,17 @@ class RegisterView(generics.CreateAPIView):
 
     queryset = user.objects.all()
     serializer_class = RegisterSerializer
+
+
+
+class GetListProduct(APIView):
+
+    def get(self, request):
+        products =  Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+        
+
 
 
 
