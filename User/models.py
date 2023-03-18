@@ -62,7 +62,7 @@ class Product(models.Model):
     title = models.CharField(max_length=140, blank=True)
     description = models.TextField(max_length=300, blank=True)
     price = models.CharField(max_length=100, blank=True)
-    image = models.ImageField(blank=True, upload_to='products/')
+    image = models.URLField(blank=True)
 
 
     class Meta:
